@@ -1,164 +1,148 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tipos de Almacenamiento de Datos</title>
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+// =============================
+// Datos de ejemplo
+// =============================
 
-  <!-- Encabezado -->
-  <header class="bg-blue-600 text-white p-6 text-center">
-    <h1 class="text-3xl font-bold">Tipos de Almacenamiento de Datos</h1>
-    <p class="mt-2">Una guía educativa interactiva</p>
-  </header>
+// 10 tipos de almacenamiento
+const items = [
+  {
+    tipo: "RAM",
+    uso: "Memoria principal para procesos activos",
+    ejemplos: "DDR4, DDR5",
+    latencia: "Nanosegundos",
+    rendimiento: "Muy alto",
+    durabilidad: "Baja (volátil)",
+    escalabilidad: "Limitada por hardware",
+    coste: "Alto",
+    desc: "La RAM permite acceso inmediato a datos, pero se borra al apagar."
+  },
+  {
+    tipo: "SSD NVMe",
+    uso: "Almacenamiento secundario de alto rendimiento",
+    ejemplos: "Samsung 980 Pro, WD Black",
+    latencia: "Microsegundos",
+    rendimiento: "Muy alto",
+    durabilidad: "Alta",
+    escalabilidad: "Media",
+    coste: "Medio-Alto",
+    desc: "Unidades de estado sólido con interfaz NVMe, rápidas para bases de datos y cargas intensivas."
+  },
+  {
+    tipo: "HDD",
+    uso: "Almacenamiento masivo a bajo coste",
+    ejemplos: "Seagate Barracuda, WD Blue",
+    latencia: "Milisegundos",
+    rendimiento: "Bajo",
+    durabilidad: "Media",
+    escalabilidad: "Alta",
+    coste: "Bajo",
+    desc: "Discos duros tradicionales con platos magnéticos, adecuados para archivos grandes."
+  },
+  {
+    tipo: "NAS",
+    uso: "Almacenamiento compartido en red",
+    ejemplos: "Synology, QNAP",
+    latencia: "Milisegundos (depende de red)",
+    rendimiento: "Medio",
+    durabilidad: "Alta (con RAID)",
+    escalabilidad: "Media",
+    coste: "Medio",
+    desc: "Sistemas accesibles en red para trabajo colaborativo y respaldo."
+  },
+  {
+    tipo: "SAN",
+    uso: "Red de almacenamiento de alto rendimiento",
+    ejemplos: "Fibre Channel SAN, iSCSI SAN",
+    latencia: "Baja",
+    rendimiento: "Alto",
+    durabilidad: "Alta",
+    escalabilidad: "Alta",
+    coste: "Alto",
+    desc: "Infraestructura empresarial que conecta servidores a bloques de almacenamiento dedicados."
+  },
+  {
+    tipo: "Objeto en nube",
+    uso: "Almacenamiento de objetos en la nube",
+    ejemplos: "Amazon S3, Azure Blob, Google Cloud Storage",
+    latencia: "Variable",
+    rendimiento: "Medio",
+    durabilidad: "Muy alta (11 9’s)",
+    escalabilidad: "Ilimitada",
+    coste: "Pago por uso",
+    desc: "Ideal para archivos estáticos, copias de seguridad y grandes volúmenes de datos distribuidos."
+  },
+  {
+    tipo: "Bloque en nube",
+    uso: "Discos virtuales para servidores en la nube",
+    ejemplos: "Amazon EBS, Azure Managed Disks",
+    latencia: "Baja",
+    rendimiento: "Alto",
+    durabilidad: "Alta",
+    escalabilidad: "Alta",
+    coste: "Pago por capacidad",
+    desc: "Se usa como disco adjunto a máquinas virtuales; ideal para bases de datos transaccionales."
+  },
+  {
+    tipo: "BD Relacional",
+    uso: "Bases de datos estructuradas con SQL",
+    ejemplos: "MySQL, PostgreSQL, Oracle",
+    latencia: "Baja",
+    rendimiento: "Alto (consultas optimizadas)",
+    durabilidad: "Alta (ACID)",
+    escalabilidad: "Vertical (limitada)",
+    coste: "Variable",
+    desc: "Organiza datos en tablas y soporta transacciones con propiedades ACID."
+  },
+  {
+    tipo: "NoSQL Clave-Valor",
+    uso: "Bases de datos para acceso rápido a pares clave-valor",
+    ejemplos: "Redis, DynamoDB",
+    latencia: "Muy baja",
+    rendimiento: "Muy alto",
+    durabilidad: "Alta",
+    escalabilidad: "Horizontal",
+    coste: "Pago por uso / Variable",
+    desc: "Perfecto para caché, sesiones y aplicaciones que requieren baja latencia."
+  },
+  {
+    tipo: "Cinta / Archivado",
+    uso: "Almacenamiento a largo plazo y bajo coste",
+    ejemplos: "LTO Ultrium",
+    latencia: "Muy alta (minutos)",
+    rendimiento: "Muy bajo",
+    durabilidad: "Alta (décadas)",
+    escalabilidad: "Alta",
+    coste: "Muy bajo",
+    desc: "Medio tradicional para copias de seguridad y archivado histórico."
+  }
+];
 
-  <main class="max-w-5xl mx-auto p-6 space-y-12">
+// Glosario (6–8 términos clave)
+const glosario = [
+  { termino: "Latencia", definicion: "Tiempo que tarda un sistema en responder a una solicitud de acceso a datos." },
+  { termino: "IOPS", definicion: "Operaciones de entrada/salida por segundo; métrica de rendimiento de almacenamiento." },
+  { termino: "ACID", definicion: "Propiedades de las transacciones en bases de datos: Atomicidad, Consistencia, Aislamiento y Durabilidad." },
+  { termino: "RAID", definicion: "Conjunto de técnicas para combinar varios discos y mejorar redundancia o rendimiento." },
+  { termino: "CAP", definicion: "Teorema que indica que una base de datos distribuida no puede garantizar Consistencia, Disponibilidad y Tolerancia a particiones simultáneamente." },
+  { termino: "Throughput", definicion: "Cantidad de datos que se pueden transferir en un periodo de tiempo." },
+  { termino: "Snapshot", definicion: "Copia puntual de un sistema de almacenamiento o base de datos." }
+];
 
-    <!-- Sección: Filtro -->
-    <section id="filtro">
-      <h2 class="text-2xl font-semibold mb-4">Filtrar tipos de almacenamiento</h2>
-      <select id="filterSelect" class="border p-2 rounded w-full md:w-1/2">
-        <option value="all">Mostrar todos</option>
-        <option value="primario">Primario (RAM, caché)</option>
-        <option value="secundario">Secundario (HDD, SSD)</option>
-        <option value="terciario">Terciario (cintas, discos ópticos)</option>
-        <option value="nube">En la nube</option>
-      </select>
-    </section>
+// Preguntas de quiz
+const preguntas = [
+  {
+    enunciado: "¿Qué tipo de almacenamiento tiene la latencia más baja?",
+    opciones: ["HDD", "RAM", "Cinta"],
+    correcta: "RAM"
+  },
+  {
+    enunciado: "¿Cuál de los siguientes es un ejemplo de almacenamiento de objetos en la nube?",
+    opciones: ["Amazon S3", "PostgreSQL", "Redis"],
+    correcta: "Amazon S3"
+  },
+  {
+    enunciado: "El teorema CAP establece limitaciones en...",
+    opciones: ["Bases de datos distribuidas", "Memoria RAM", "Unidades SSD"],
+    correcta: "Bases de datos distribuidas"
+  }
+];
 
-    <!-- Sección: Tarjetas -->
-    <section id="tarjetas">
-      <h2 class="text-2xl font-semibold mb-4">Tarjetas descriptivas</h2>
-      <div id="cardsContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div class="card bg-white p-4 rounded-2xl shadow" data-type="primario">
-          <h3 class="font-bold text-lg">Almacenamiento Primario</h3>
-          <p>Incluye RAM y memoria caché. Muy rápido, pero volátil.</p>
-        </div>
-        <div class="card bg-white p-4 rounded-2xl shadow" data-type="secundario">
-          <h3 class="font-bold text-lg">Almacenamiento Secundario</h3>
-          <p>Ejemplo: discos duros (HDD) y unidades de estado sólido (SSD).</p>
-        </div>
-        <div class="card bg-white p-4 rounded-2xl shadow" data-type="terciario">
-          <h3 class="font-bold text-lg">Almacenamiento Terciario</h3>
-          <p>Discos ópticos y cintas magnéticas. Útiles para respaldo.</p>
-        </div>
-        <div class="card bg-white p-4 rounded-2xl shadow" data-type="nube">
-          <h3 class="font-bold text-lg">Almacenamiento en la Nube</h3>
-          <p>Acceso remoto a través de Internet. Escalable y flexible.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección: Tabla comparativa -->
-    <section id="tabla">
-      <h2 class="text-2xl font-semibold mb-4">Tabla Comparativa</h2>
-      <div class="overflow-x-auto">
-        <table class="table-auto w-full border-collapse border border-gray-300 text-sm">
-          <thead class="bg-gray-200">
-            <tr>
-              <th class="border p-2">Tipo</th>
-              <th class="border p-2">Velocidad</th>
-              <th class="border p-2">Capacidad</th>
-              <th class="border p-2">Costo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border p-2">Primario</td>
-              <td class="border p-2">Muy alta</td>
-              <td class="border p-2">Baja</td>
-              <td class="border p-2">Alta</td>
-            </tr>
-            <tr>
-              <td class="border p-2">Secundario</td>
-              <td class="border p-2">Media</td>
-              <td class="border p-2">Alta</td>
-              <td class="border p-2">Media</td>
-            </tr>
-            <tr>
-              <td class="border p-2">Terciario</td>
-              <td class="border p-2">Baja</td>
-              <td class="border p-2">Muy alta</td>
-              <td class="border p-2">Bajo</td>
-            </tr>
-            <tr>
-              <td class="border p-2">Nube</td>
-              <td class="border p-2">Variable</td>
-              <td class="border p-2">Virtualmente ilimitada</td>
-              <td class="border p-2">Pago por uso</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Sección: Glosario -->
-    <section id="glosario">
-      <h2 class="text-2xl font-semibold mb-4">Glosario</h2>
-      <dl class="space-y-2">
-        <div>
-          <dt class="font-bold">RAM</dt>
-          <dd>Memoria de acceso aleatorio. Volátil y rápida.</dd>
-        </div>
-        <div>
-          <dt class="font-bold">SSD</dt>
-          <dd>Unidad de estado sólido. Rápida y sin partes móviles.</dd>
-        </div>
-        <div>
-          <dt class="font-bold">Cinta Magnética</dt>
-          <dd>Medio de respaldo de gran capacidad, acceso secuencial.</dd>
-        </div>
-        <div>
-          <dt class="font-bold">Almacenamiento en la nube</dt>
-          <dd>Servicio que permite guardar datos en servidores externos accesibles por Internet.</dd>
-        </div>
-      </dl>
-    </section>
-
-    <!-- Sección: Quiz -->
-    <section id="quiz">
-      <h2 class="text-2xl font-semibold mb-4">Mini Quiz</h2>
-      <div class="space-y-4">
-        <p><strong>Pregunta:</strong> ¿Qué tipo de almacenamiento es más rápido pero volátil?</p>
-        <button onclick="checkAnswer('primario')" class="bg-blue-600 text-white px-4 py-2 rounded">Primario</button>
-        <button onclick="checkAnswer('secundario')" class="bg-blue-600 text-white px-4 py-2 rounded">Secundario</button>
-        <p id="quizResult" class="mt-4 font-bold"></p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="bg-gray-200 text-center p-4 mt-12">
-    <p>&copy; 2025 - Proyecto educativo sobre almacenamiento de datos</p>
-  </footer>
-
-  <!-- Script básico -->
-  <script>
-    // Filtro de tarjetas
-    const filterSelect = document.getElementById('filterSelect');
-    const cards = document.querySelectorAll('.card');
-    filterSelect.addEventListener('change', () => {
-      const value = filterSelect.value;
-      cards.forEach(card => {
-        card.style.display = (value === 'all' || card.dataset.type === value) ? 'block' : 'none';
-      });
-    });
-
-    // Quiz
-    function checkAnswer(answer) {
-      const result = document.getElementById('quizResult');
-      if (answer === 'primario') {
-        result.textContent = '¡Correcto! El almacenamiento primario es rápido pero volátil.';
-        result.className = 'text-green-600 font-bold mt-4';
-      } else {
-        result.textContent = 'Incorrecto. Intenta de nuevo.';
-        result.className = 'text-red-600 font-bold mt-4';
-      }
-    }
-  </script>
-
-</body>
-</html>
